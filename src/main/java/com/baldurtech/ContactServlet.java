@@ -16,6 +16,10 @@ public class ContactServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req,
 					   HttpServletResponse resp)
 					   throws IOException,ServletException{
-		resp.getWriter().println("OK");				
+		String username = req.getParameter("username");	
+		String password = req.getParameter("password");
+		
+		resp.getWriter().println("username:" + username);
+		resp.getWriter().println("password:" + password);
 	}
 }
