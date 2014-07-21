@@ -18,7 +18,7 @@ public class ContactServlet extends HttpServlet{
 		Statement statement = null;
 		ResultSet resultset = null;
 		
-		response.getWriter().println("Get contact by id: " + request.getParameter("contactId"));
+		
 		
 		try{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -28,7 +28,7 @@ public class ContactServlet extends HttpServlet{
 		try{
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
 			statement = connection.createStatement();
-			resultset = statement.executeQuery("select * from contact where id = 1");
+			resultset = statement.executeQuery("select * from contact where id =" + request.getParameter("contactName"));
 			resultset.next();
 			response.getWriter().println(resultset.getString("name"));
 		}catch(SQLException sqle){
