@@ -18,6 +18,17 @@ public class ContactServlet extends HttpServlet{
 		Statement statement = null;
 		ResultSet resultset = null;
 		
+		String name = null;
+		String mobile = null;
+		String vpmn = null;
+		String email = null;
+		String homeaddress = null;
+		String officeaddress = null;
+		String memo = null;
+		String groups = null;
+		String job = null;
+		Integer joblevel = null;
+	
 		try{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 		}catch(Exception ex){
@@ -28,19 +39,30 @@ public class ContactServlet extends HttpServlet{
 				connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
 				statement = connection.createStatement();
 				resultset = statement.executeQuery("select * from contact" );
-		
+				
 				while(resultset.next()){
 				
-					response.getWriter().println("name:" + resultset.getString("name"));
-					response.getWriter().println("mobile:" + resultset.getString("mobile"));
-					response.getWriter().println("vpmn:" + resultset.getString("vpmn"));
-					response.getWriter().println("email:" + resultset.getString("email"));
-					response.getWriter().println("homeaddress:" + resultset.getString("home_address"));
-					response.getWriter().println("officeaddress:" + resultset.getString("office_address"));
-					response.getWriter().println("memo:" + resultset.getString("memo"));
-					response.getWriter().println("groups:" + resultset.getString("groups"));
-					response.getWriter().println("job:" + resultset.getString("job"));
-					response.getWriter().println("joblevel:" + resultset.getInt("job_level"));
+					name = resultset.getString("name");
+					mobile = resultset.getString("mobile");
+					vpmn = resultset.getString("vpmn");
+					email = resultset.getString("email");
+					homeaddress = resultset.getString("home_address");
+					officeaddress = resultset.getString("office_address");
+					memo = resultset.getString("memo");
+					groups = resultset.getString("groups");
+					job = resultset.getString("job");
+					joblevel = resultset.getInt("job_level");
+					
+					response.getWriter().println("Name:" + name);
+					response.getWriter().println("Mobile:" + mobile);
+					response.getWriter().println("Vpmn:" + vpmn);
+					response.getWriter().println("Email:" + email);
+					response.getWriter().println("Homeaddress:" + homeaddress);
+					response.getWriter().println("Officeaddress:" + officeaddress);
+					response.getWriter().println("Memo:" + memo);
+					response.getWriter().println("Groups:" + groups);
+					response.getWriter().println("Job:" + job);
+					response.getWriter().println("JobLevel:" + joblevel);
 				}
 			}catch(SQLException sqle){
 					response.getWriter().println("Cannot connect to DB.");
@@ -53,17 +75,28 @@ public class ContactServlet extends HttpServlet{
 				connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
 				statement = connection.createStatement();
 				resultset = statement.executeQuery("select * from contact where id =" + request.getParameter("contactId"));
+				
 				if(resultset.next()){
-					response.getWriter().println("name:" + resultset.getString("name"));
-					response.getWriter().println("mobile:" + resultset.getString("mobile"));
-					response.getWriter().println("vpmn:" + resultset.getString("vpmn"));
-					response.getWriter().println("email:" + resultset.getString("email"));
-					response.getWriter().println("homeaddress:" + resultset.getString("home_address"));
-					response.getWriter().println("officeaddress:" + resultset.getString("office_address"));
-					response.getWriter().println("memo:" + resultset.getString("memo"));
-					response.getWriter().println("groups:" + resultset.getString("groups"));
-					response.getWriter().println("job:" + resultset.getString("job"));
-					response.getWriter().println("joblevel:" + resultset.getInt("job_level"));
+					name = resultset.getString("name");
+					mobile = resultset.getString("mobile");
+					vpmn = resultset.getString("vpmn");
+					email = resultset.getString("email");
+					homeaddress = resultset.getString("home_address");
+					officeaddress = resultset.getString("office_address");
+					memo = resultset.getString("memo");
+					groups = resultset.getString("groups");
+					job = resultset.getString("job");
+					joblevel = resultset.getInt("job_level");
+					response.getWriter().println("Name:" + name);
+					response.getWriter().println("Mobile:" + mobile);
+					response.getWriter().println("Vpmn:" + vpmn);
+					response.getWriter().println("Email:" + email);
+					response.getWriter().println("Homeaddress:" + homeaddress);
+					response.getWriter().println("Officeaddress:" + officeaddress);
+					response.getWriter().println("Memo:" + memo);
+					response.getWriter().println("Groups:" + groups);
+					response.getWriter().println("Job:" + job);
+					response.getWriter().println("JobLevel:" + joblevel);
 				}else{
 					response.getWriter().println("contact not found!");
 				}
