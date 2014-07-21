@@ -10,6 +10,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 public class ContactServlet extends HttpServlet{
 	public	void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -35,6 +39,9 @@ public class ContactServlet extends HttpServlet{
 		
 		}			
 		if(request.getParameter("contactId") == null){
+			
+			List contacts = new ArrayList();
+			
 			try{
 				connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
 				statement = connection.createStatement();
@@ -53,16 +60,32 @@ public class ContactServlet extends HttpServlet{
 					job = resultset.getString("job");
 					joblevel = resultset.getInt("job_level");
 					
-					response.getWriter().println("Name:" + name);
-					response.getWriter().println("Mobile:" + mobile);
-					response.getWriter().println("Vpmn:" + vpmn);
-					response.getWriter().println("Email:" + email);
-					response.getWriter().println("Homeaddress:" + homeaddress);
-					response.getWriter().println("Officeaddress:" + officeaddress);
-					response.getWriter().println("Memo:" + memo);
-					response.getWriter().println("Groups:" + groups);
-					response.getWriter().println("Job:" + job);
-					response.getWriter().println("JobLevel:" + joblevel);
+					Map contact = new HashMap();
+					
+					contact.put("Name",name);
+					contact.put("Mobile",mobile);
+					contact.put("Vpmn",vpmn);
+					contact.put("Email",email);
+					contact.put("Homeaddress",homeaddress);
+					contact.put("Officeaddress",officeaddress);
+					contact.put("Memo",memo);
+					contact.put("Groups",groups);
+					contact.put("Job",job);
+					contact.put("JobLevel",joblevel);
+					
+					contacts.add(contact);
+					
+					response.getWriter().println("Name:" + contact.get("Name"));
+					response.getWriter().println("Mobile:" + contact.get("Mobile"));
+					response.getWriter().println("Vpmn:" + contact.get("Vpmn"));
+					response.getWriter().println("Email:" + contact.get("Email"));
+					response.getWriter().println("Homeaddress:" + contact.get("Homeaddress"));
+					response.getWriter().println("Officeaddress:" + contact.get("Officeaddress"));
+					response.getWriter().println("Memo:" + contact.get("Memo"));
+					response.getWriter().println("Groups:" + contact.get("Groups"));
+					response.getWriter().println("Job:" + contact.get("Job"));
+					response.getWriter().println("JobLevel:" + contact.get("JobLevel"));
+					
 				}
 			}catch(SQLException sqle){
 					response.getWriter().println("Cannot connect to DB.");
@@ -77,6 +100,8 @@ public class ContactServlet extends HttpServlet{
 				resultset = statement.executeQuery("select * from contact where id =" + request.getParameter("contactId"));
 				
 				if(resultset.next()){
+					List contacts = new ArrayList();
+					
 					name = resultset.getString("name");
 					mobile = resultset.getString("mobile");
 					vpmn = resultset.getString("vpmn");
@@ -87,16 +112,32 @@ public class ContactServlet extends HttpServlet{
 					groups = resultset.getString("groups");
 					job = resultset.getString("job");
 					joblevel = resultset.getInt("job_level");
-					response.getWriter().println("Name:" + name);
-					response.getWriter().println("Mobile:" + mobile);
-					response.getWriter().println("Vpmn:" + vpmn);
-					response.getWriter().println("Email:" + email);
-					response.getWriter().println("Homeaddress:" + homeaddress);
-					response.getWriter().println("Officeaddress:" + officeaddress);
-					response.getWriter().println("Memo:" + memo);
-					response.getWriter().println("Groups:" + groups);
-					response.getWriter().println("Job:" + job);
-					response.getWriter().println("JobLevel:" + joblevel);
+					
+					Map contact = new HashMap();
+					
+					contact.put("Name",name);
+					contact.put("Mobile",mobile);
+					contact.put("Vpmn",vpmn);
+					contact.put("Email",email);
+					contact.put("Homeaddress",homeaddress);
+					contact.put("Officeaddress",officeaddress);
+					contact.put("Memo",memo);
+					contact.put("Groups",groups);
+					contact.put("Job",job);
+					contact.put("JobLevel",joblevel);
+					
+					contacts.add(contact);
+					
+					response.getWriter().println("Name:" + contact.get("Name"));
+					response.getWriter().println("Mobile:" + contact.get("Mobile"));
+					response.getWriter().println("Vpmn:" + contact.get("Vpmn"));
+					response.getWriter().println("Email:" + contact.get("Email"));
+					response.getWriter().println("Homeaddress:" + contact.get("Homeaddress"));
+					response.getWriter().println("Officeaddress:" + contact.get("Officeaddress"));
+					response.getWriter().println("Memo:" + contact.get("Memo"));
+					response.getWriter().println("Groups:" + contact.get("Groups"));
+					response.getWriter().println("Job:" + contact.get("Job"));
+					response.getWriter().println("JobLevel:" + contact.get("JobLevel"));
 				}else{
 					response.getWriter().println("contact not found!");
 				}
