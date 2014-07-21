@@ -29,7 +29,7 @@ public class ContactServlet extends HttpServlet{
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=");
 			statement = connection.createStatement();
 			resultset = statement.executeQuery("select * from contact where id =" + request.getParameter("contactId"));
-			resultset.next();
+			if(resultset.next()){
 			response.getWriter().println("name:" + resultset.getString("name"));
 			response.getWriter().println("mobile:" + resultset.getString("mobile"));
 			response.getWriter().println("vpmn:" + resultset.getString("vpmn"));
@@ -40,6 +40,9 @@ public class ContactServlet extends HttpServlet{
 			response.getWriter().println("groups:" + resultset.getString("groups"));
 			response.getWriter().println("job:" + resultset.getString("job"));
 			response.getWriter().println("joblevel:" + resultset.getInt("job_level"));
+			}else{
+				response.getWriter().println("contact not found!");
+			}
 		}catch(SQLException sqle){
 			response.getWriter().println("Cannot connect to DB.");
 			response.getWriter().println(sqle.getMessage());
