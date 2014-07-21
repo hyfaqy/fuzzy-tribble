@@ -11,12 +11,14 @@
 	</description>
 	
 	<servlet>
-		<servlet-name>contact</servlet-name>
+		<servlet-name>haoyufei</servlet-name>
 		<servlet-class>com.baldurtech.ContactServlet</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>contact</servlet-name>
+		<servlet-name>haoyufei</servlet-name>
 		<url-pattern>/contact</url-pattern>
 	</servlet-mapping>
+	
+	
 </web-app>
